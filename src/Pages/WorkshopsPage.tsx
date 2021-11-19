@@ -16,13 +16,13 @@ const WorkshopsPage = () => {
 
   const handleList = () => {
     setViewTheme(
-      ' grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 '
+      ' flex flex-col items-center justify-center space-y-4 '
     );
   };
 
   const handleGrid = () => {
     setViewTheme(
-      ' grid grid-cols-1 md:grid-cols-3 sm:gap-6 gap-2 '
+      ' grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 '
     );
   };
   useEffect(() => {
