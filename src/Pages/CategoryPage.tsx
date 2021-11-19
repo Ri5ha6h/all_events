@@ -20,7 +20,13 @@ const CategoryPage = () => {
       </h1>
       <ul className='flex mt-5 space-x-1 sm:space-x-5 sm:mt-0'>
         {category.map((item, i) => (
-          <Link key={i} to={`/${item.category}`}>
+          <Link
+            onClick={() => {
+              window.location.href = `/${item.category}`;
+            }}
+            key={i}
+            to={`/${item.category}`}
+          >
             <li className='text-lg font-medium tracking-wider text-gray-400 sm:text-xl hover:underline hover:text-gray-700'>
               {item.category}
             </li>

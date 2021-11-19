@@ -1,18 +1,21 @@
-import { memo } from 'react';
+import axios from 'axios';
+import { memo, useEffect, useState } from 'react';
 import {
   BrowserRouter,
   Routes,
   Route,
   Navigate,
 } from 'react-router-dom';
-import AllPage from './Pages/AllPage';
-import BusinessPage from './Pages/BusinessPage';
+import { categoryApi } from './Api/Api';
+import { Category } from './Modal/Category';
 import CategoryPage from './Pages/CategoryPage';
-import MusicPage from './Pages/MusicPage';
-import SportsPage from './Pages/SportsPage';
-import WorkshopsPage from './Pages/WorkshopsPage';
+import EventPage from './Pages/EventPage';
 
 const App = () => {
+  const [url, setUrl] = useState<Category[]>([]);
+  useEffect(() => {
+     categoryApi().then((res)=>{return setUrl(res.data)});
+  }, []);
   return (
     <>
       <BrowserRouter>
@@ -22,26 +25,9 @@ const App = () => {
             path='/'
             element={<Navigate to='/all' />}
           />
-          <Route
-            path='/all'
-            element={<AllPage />}
-          />
-          <Route
-            path='/music'
-            element={<MusicPage />}
-          />
-          <Route
-            path='/business'
-            element={<BusinessPage />}
-          />
-          <Route
-            path='/sports'
-            element={<SportsPage />}
-          />
-          <Route
-            path='/workshops'
-            element={<WorkshopsPage />}
-          />
+          {url.map((r,i)=> (
+            <Route key={i} path={`/${r.category}`} element={<EventPage url={r.category}/>}/>
+          ))}
         </Routes>
       </BrowserRouter>
     </>
